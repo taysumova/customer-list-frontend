@@ -27,3 +27,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Thanks to article -https://scotch.io/tutorials/building-a-modern-app-using-nestjs-mongodb-and-vuejs
