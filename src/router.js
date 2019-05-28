@@ -10,19 +10,19 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
       {
-          path: '/',
-          name: 'home',
-          component: HomeComponent
+        path: '/',
+        name: 'home',
+        component: HomeComponent
       },
       {
-          path: '/create',
-          name: 'Create',
-          component: CreateComponent
+        path: '/create',
+        name: 'Create',
+        component: CreateComponent
       },
       {
-          path: '/edit/:id',
-          name: 'Edit',
-          component: EditComponent
+        path: '/edit/:id',
+        name: 'Edit',
+        component: EditComponent
       }
     ]
 })
