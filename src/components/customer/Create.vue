@@ -39,6 +39,7 @@
       </select>
     </div>
     <button class="btn btn-success" @click="createCustomer">Добавить</button>
+    <router-link to="/">Вернуться без добавления</router-link>
   </div>
 </template>
 <script>
@@ -75,7 +76,7 @@
       __submitToServer(data) {
           CustomerService.addCustomer(data).then(data => {
           console.log(data);
-          router.push({ name: "home" });
+          router.push({ name: "CustomerList" });
         });
       }
     }

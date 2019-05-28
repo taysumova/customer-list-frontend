@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeComponent from '@/views/Home'
+import CustomerListComponent from '@/views/CustomerList'
 import EditComponent from '@/components/customer/Edit'
 import CreateComponent from '@/components/customer/Create'
+import ViewComponent from '@/components/customer/View'
 
 Vue.use(Router)
 
@@ -11,13 +12,18 @@ export default new Router({
   routes: [
       {
         path: '/',
-        name: 'home',
-        component: HomeComponent
+        name: 'CustomerList',
+        component: CustomerListComponent
       },
       {
         path: '/create',
         name: 'Create',
         component: CreateComponent
+      },
+      {
+        path: '/view/:id',
+        name: 'View',
+        component: ViewComponent
       },
       {
         path: '/edit/:id',

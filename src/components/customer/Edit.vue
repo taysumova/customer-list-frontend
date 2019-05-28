@@ -39,6 +39,7 @@
       </select>
     </div>
     <button class="btn btn-success" @click="editCustomer">Сохранить</button>
+    <router-link to="/">Вернуться без сохранения</router-link>
   </div>
 </template>
 <script>
@@ -70,15 +71,12 @@ export default {
             CustomerService.editCustomer(this.id, customerData)
                 .then(data => {
                     console.log(data);
-                    router.push({ name: "home" });
+                    router.push({ name: "CustomerList" });
                 });
         },
         getCustomer() {
           CustomerService.showCustomer(this.id)
             .then(data => (this.customer = data.data));
-        },
-        navigate() {
-            router.go(-1);
         }
     }
 }
