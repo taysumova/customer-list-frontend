@@ -1,35 +1,35 @@
 <template>
-  <div class="customer-form">
+  <div class="customer-form customer-form--edit">
     <h2 class="customer-form__title">Отредактировать информацию</h2>
     <div class="customer-form__input input">
       <label class="input__label">Фамилия</label>
-      <input type="text" class="input__field" v-model="customer.last_name" required>
+      <input type="text" class="input__field" v-model="customer.last_name">
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Имя</label>
-      <input type="text" class="input__field" v-model="customer.first_name" required>
+      <input type="text" class="input__field" v-model="customer.first_name">
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Отчество</label>
-      <input type="text" class="input__field" v-model="customer.middle_name" required>
+      <input type="text" class="input__field" v-model="customer.middle_name">
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Email</label>
-      <input type="text" class="input__field" v-model="customer.email" required>
+      <input type="text" class="input__field" v-model="customer.email">
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Номер телефона</label>
-      <input type="text" class="input__field" v-model="customer.phone" required>
+      <input type="text" class="input__field" v-model="customer.phone">
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Адрес</label>
-      <input type="text" class="input__field" v-model="customer.address" required>
+      <input type="text" class="input__field" v-model="customer.address">
     </div>
     <div class="customer-form__textarea textarea">
       <label class="textarea__label">Дополнительная информация</label>
-      <textarea class="textarea__field" v-model="customer.additionalInfo" required></textarea>
+      <textarea class="textarea__field" v-model="customer.additionalInfo" rows="5"></textarea>
     </div>
-    <div class="customer-form__select">
+    <div class="customer-form__select select">
       <label class="select__label">Статус заявки</label>
       <select class="select__field" v-model="customer.status">
         <option class="select__option">Новый клиент</option>
@@ -38,8 +38,12 @@
         <option class="select__option">Отмена</option>
       </select>
     </div>
-    <button class="btn btn-success" @click="editCustomer">Сохранить</button>
-    <router-link to="/">Вернуться без сохранения</router-link>
+    <button class="btn btn--save" @click="editCustomer">Сохранить</button>
+    <router-link
+      to="/"
+      class="btn--back">
+      Вернуться без сохранения &#8678;
+    </router-link>
   </div>
 </template>
 <script>
@@ -81,3 +85,6 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+</style>

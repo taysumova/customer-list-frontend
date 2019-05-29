@@ -1,50 +1,43 @@
 <template>
-  <div class="customer-form">
-    <h2 class="customer-form__title">Информация о клиенте</h2>
-    <div class="customer-form__input input">
-      Фамилия: {{customer.last_name}}
-    </div>
-    <div class="customer-form__input input">
-      Имя: {{customer.first_name}}
-    </div>
-    <div class="customer-form__input input">
-      Отчество: {{customer.middle_name}}
-    </div>
-    <div class="customer-form__input input">
-      Email: {{customer.email}}
-    </div>
-    <div class="customer-form__input input">
-      Номер телефона: {{customer.phone}}
-    </div>
-    <div class="customer-form__input input">
-      Адрес: {{customer.address}}
-    </div>
-    <div class="customer-form__textarea textarea">
-      Дополнительная информация: {{customer.additionalInfo}}
-    </div>
-    <div class="customer-form__select">
-      Статус заявки: {{customer.status}}
-    </div>
+  <div class="customer-info">
+    <h2 class="customer-info__title">Информация о клиенте</h2>
     <router-link
         :to="{
         name: 'Edit',
-        params: {id: id}
+        params: {
+          id: id
+          }
         }"
-        class="btn btn--edit">
-        &#9998;
+        class="btn btn--icon btn--edit">
     </router-link>
     <button
-        class="btn btn--delete"
+        class="btn btn--icon btn--delete"
         @click="deleteCustomer(id)">
-        &#10060;
     </button>
-    <router-link
-        class="btn btn--back"
-        to="/">
-        Вернуться к списку клиентов
+    <div class="customer-info__status">
+      Статус заявки: {{customer.status}}
+    </div>
+    <div class="customer-info__full-name">
+      {{customer.last_name}} {{customer.first_name}} {{customer.middle_name}}
+    </div>
+    <div class="middle-block">
+      <div class="customer-info__contacts contacts">
+        <h3>Контактная информация: </h3>
+        <span class="contacts__data contacts__email"><b>Email: </b>{{customer.email}}</span>
+        <span class="contacts__data contacts__phone"><b>Номер: </b>{{customer.phone}}</span>
+        <span class="contacts__data contacts__address"><b>Адрес: </b>{{customer.address}}</span>
+      </div>
+      <div class="customer-info__additional">
+        <h3>Дополнительная информация:</h3>
+        <p>{{customer.additionalInfo}}</p>
+      </div>
+    </div>
+    <router-link class="btn--back" to="/">
+      Вернуться к списку клиентов &#8678;
     </router-link>
   </div>
 </template>
+
 <script>
 import CustomerService from '@/services/CustomerService'
 import router from "../../router";
@@ -77,3 +70,53 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+  .customer-info {
+    position: relative;
+    margin: 0 auto;
+    max-width: 700px;
+    &__title {
+      font-size: 1.2rem;
+      padding-right: 50px;
+    }
+    .btn--edit {
+      position: absolute;
+      top: 0;
+      right: 33px;
+    }
+    .btn--delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .middle-block {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &__full-name {
+      text-transform: capitalize;
+      font-size: 1.8rem;
+    }
+    &__contacts {
+      margin-right: 40px;
+      min-width: 300px;
+      width: 40%;
+    }
+    &__additional {
+      min-width: 300px;
+      width: 40%;
+    }
+    .contacts {
+      &__data {
+        display: block;
+      }
+    }
+    &__status {
+      margin: 20px 0;
+    }
+    h3 {
+      border-bottom: 2px solid gray;
+    }
+  }
+</style>
