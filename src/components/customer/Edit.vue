@@ -40,7 +40,12 @@
     </div>
     <button class="btn btn--save" @click="editCustomer">Сохранить</button>
     <router-link
-      to="/"
+      :to="{
+          name: 'View',
+          params: {
+          id: id
+        }
+      }"
       class="btn--back">
       Вернуться без сохранения &#8678;
     </router-link>
@@ -75,7 +80,12 @@ export default {
             CustomerService.editCustomer(this.id, customerData)
                 .then(data => {
                     console.log(data);
-                    router.push({ name: "CustomerList" });
+                    router.push({
+                      name: 'View',
+                      params: {
+                        id: this.id
+                        }
+                    });
                 });
         },
         getCustomer() {
