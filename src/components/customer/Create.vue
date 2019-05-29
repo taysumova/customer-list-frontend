@@ -1,71 +1,130 @@
 <template>
-    <div>
-        <div class="col-md-12 form-wrapper">
-            <h2> Create Customer </h2>
-            <form id="create-post-form" @submit.prevent="createCustomer">
-                <div class="form-group col-md-12">
-                    <label for="first_name"> First Name </label>
-                    <input type="text" id="first_name" v-model="first_name" name="first_name" class="form-control" placeholder="Enter firstname">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="last_name"> Last Name </label>
-                    <input type="text" id="last_name" v-model="last_name" name="last_name" class="form-control" placeholder="Enter Last name">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="email"> Email </label>
-                    <input type="text" id="email" v-model="email" name="email" class="form-control" placeholder="Enter email">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="phone_number"> Phone </label>
-                    <input type="text" id="phone_number" v-model="phone" name="phone_number" class="form-control" placeholder="Enter Phone number">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="address"> Address </label>
-                    <input type="text" id="address" v-model="address" name="address" class="form-control" placeholder="Enter Address">
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="description"> Description </label>
-                    <input type="text" id="description" v-model="description" name="description" class="form-control" placeholder="Enter Description">
-                </div>
-                <div class="form-group col-md-4 pull-right">
-                    <button class="btn btn-success" type="submit"> Create Customer </button>
-                </div>
-            </form>
-        </div>
+  <div class="customer-form">
+    <h2 class="customer-form__title">Добавить клиента</h2>
+    <div class="customer-form__input input">
+      <label class="input__label">Фамилия</label>
+      <input type="text" class="input__field" v-model="last_name">
     </div>
+    <div class="customer-form__input input">
+      <label class="input__label">Имя</label>
+      <input type="text" class="input__field" v-model="first_name">
+    </div>
+    <div class="customer-form__input input">
+      <label class="input__label">Отчество</label>
+      <input type="text" class="input__field" v-model="middle_name">
+    </div>
+    <div class="customer-form__input input">
+      <label class="input__label">Email</label>
+      <input type="text" class="input__field" v-model="email">
+    </div>
+    <div class="customer-form__input input">
+      <label class="input__label">Номер телефона</label>
+      <input type="text" class="input__field" v-model="phone">
+    </div>
+    <div class="customer-form__input input">
+      <label class="input__label">Адрес</label>
+      <input type="text" class="input__field" v-model="address">
+    </div>
+    <div class="customer-form__textarea textarea">
+      <label class="textarea__label">Дополнительная информация</label>
+      <textarea class="textarea__field" v-model="additionalInfo" rows="5"></textarea>
+    </div>
+    <div class="customer-form__select select">
+      <label class="select__label">Статус заявки</label>
+      <select class="select__field" v-model="status">
+        <option class="select__option">Новый клиент</option>
+        <option class="select__option">В работе</option>
+        <option class="select__option">Завершена</option>
+        <option class="select__option">Отмена</option>
+      </select>
+    </div>
+    <button class="btn btn--save" @click="createCustomer">Добавить</button>
+    <router-link
+      to="/"
+      class="btn--back">
+      Вернуться без добавления &#8678;
+    </router-link>
+  </div>
 </template>
 <script>
-    import axios from "axios";
-    import { server } from "../../helper";
-    import router from "../../router";
-    export default {
-        data() {
-            return {
-                first_name: "",
-                last_name: "",
-                email: "",
-                phone: "",
-                address: "",
-                description: ""
-            };
-        },
-        methods: {
-            createCustomer() {
-                let customerData = {
-                    first_name: this.first_name,
-                    last_name: this.last_name,
-                    email: this.email,
-                    phone: this.phone,
-                    address: this.address,
-                    description: this.description
-                };
-                this.__submitToServer(customerData);
-            },
-            __submitToServer(data) {
-                axios.post(`${server.baseURL}/customer/create`, data).then(data => {
-                    router.push({ name: "home" });
-                });
-            }
-        }
-    };
+  import CustomerService from "@/services/CustomerService";
+  import router from "@/router";
+  
+  export default {
+    data() {
+      return {
+        last_name: '',
+        first_name: '',
+        middle_name: '',
+        email: '',
+        phone: '',
+        address: '',
+        additionalInfo: '',
+        status: ''
+      }
+    },
+    methods: {
+      createCustomer() {
+        let customerData = {
+          last_name: this.last_name,
+          first_name: this.first_name,
+          middle_name: this.middle_name,
+          email: this.email,
+          phone: this.phone,
+          address: this.address,
+          additionalInfo: this.additionalInfo,
+          status: this.status
+        };
+        this.__submitToServer(customerData);
+      },
+      __submitToServer(data) {
+          CustomerService.addCustomer(data).then(data => {
+          console.log(data);
+          router.push({ name: "CustomerList" });
+        });
+      }
+    }
+  };
 </script>
+
+<style lang="scss">
+  .customer-form {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+    &__title {
+      text-align: center;
+    }
+    .input,
+    .textarea,
+    .select {
+      display: flex;
+      flex-direction: column;
+      &__field {
+        border-radius: 7px;
+        min-height: 25px;
+        outline: none;
+        padding: 0 10px;
+        margin: 10px 0 20px;
+      }
+    }
+    .select {
+      &__field {
+        background: transparent;
+        max-width: 150px;
+      }
+    }
+    .textarea {
+       &__field {
+        padding: 10px;
+      }
+    }
+    .btn--save {
+      font-size: 1.3rem;
+      margin: 0 auto;
+      min-height: 40px;
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+</style>
