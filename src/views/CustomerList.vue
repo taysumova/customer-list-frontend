@@ -3,8 +3,13 @@
     <h1 class="customer-list__title">Список клиентов</h1>
     <router-link class="btn btn--icon btn--add" to="/create"></router-link>
     <p class="customer-list--empty"
-      v-if="customers.length === 0">
-      Пока не добавлено ни одного клиента (:
+      v-if="customers.length === 0 && !loading">
+      Пока не добавлено ни одного клиента
+    </p>
+    <p class="customer-list__loading"
+      v-if="loading">
+      Загрузка...
+      <img src="@/assets/loading.gif" alt="spinner">
     </p>
     <div class="customer-list__table table">
       <div
@@ -34,7 +39,8 @@ import CustomerService from '@/services/CustomerService'
 export default {
   data() {
     return {
-      customers: []
+      customers: [],
+      loading: true
     }
   },
   created() {
@@ -43,7 +49,10 @@ export default {
   methods: {
     fetchCustomers() {
       CustomerService.getAllCustomers()
-        .then(data => (this.customers = data.data))
+        .then(data => {
+          this.customers = data.data;
+          this.loading = false;
+        })
     }
   }
 }
@@ -83,6 +92,17 @@ export default {
         &--status {
           width: 30%;
         }
+      }
+    }
+    &__loading {
+      position: relative;
+      text-align: center;
+      img {
+        left: 0;
+        width: 100%;
+        position: absolute;
+        z-index: 5;
+        top: 0;
       }
     }
   }
