@@ -24,6 +24,19 @@ a {
 
 .btn {
   background: linear-gradient(#2979ff, #abbfe2);
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px,
+    inset rgba(255,255,255,.9) 3px 3px 8px,
+    rgba(0,0,0,.8) 3px 3px 8px -3px;
+    &:active {
+      box-shadow: inset rgba(0, 0, 0, 0.5) 1px 1px 1px,
+        inset rgba(255, 255, 255, 0.9) 3px 3px 8px,
+        rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
+    }
+    // &:hover {
+    //   box-shadow: inset rgba(0, 0, 0, 0.5) 1px 1px 1px,
+    //     inset rgba(255, 255, 255, 0.9) 3px 3px 8px,
+    //     rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
+    // }
   border-radius: 7px;
   display: block;
   color: #fff;
