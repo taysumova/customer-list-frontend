@@ -22,13 +22,13 @@
               id: customer._id
               }
             }"
-            class="btn btn--icon btn--view">
+            class="btn--view">
+          <span class="table__data table__data--name">{{ customer.last_name }} {{ customer.first_name[0] }}. {{ customer.middle_name [0] }}.</span>
+          <!-- to do: hover effect -->
+          <!-- <span class="table__data">{{ customer.email }}</span> -->
+          <!-- <span class="table__data">{{ customer.phone }}</span> --> 
+          <span class="table__data table__data--status">{{ customer.status }}</span>
         </router-link>
-        <span class="table__data table__data--name">{{ customer.last_name }} {{ customer.first_name[0] }}. {{ customer.middle_name [0] }}.</span>
-        <!-- to do: hover effect -->
-        <!-- <span class="table__data">{{ customer.email }}</span> -->
-        <!-- <span class="table__data">{{ customer.phone }}</span> --> 
-        <span class="table__data table__data--status">{{ customer.status }}</span>
       </div>
     </div>
   </div>
@@ -70,12 +70,16 @@ export default {
     }
     .btn--add {
       position: absolute;
-      top: 0;
+      top: -10px;
       right: 10px;
     }
     .btn--view {
-      border-radius: 7px;
-      margin-right: 15px;
+      position: relative;
+      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 15px 13px 55px;
+      width: 100%;
     }
     .table {
       &__row {
@@ -84,14 +88,6 @@ export default {
         align-items: center;
         display: flex;
         margin: 20px auto;
-      }
-      &__data {
-        &--name {
-          width: 70%;
-        }
-        &--status {
-          width: 30%;
-        }
       }
     }
     &__loading {

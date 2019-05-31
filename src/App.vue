@@ -14,6 +14,7 @@ body  {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   min-width: 300px;
+  padding-right: 10px;
 }
 
 a {
@@ -29,17 +30,27 @@ a {
   border: none;
   outline: none;
   &--icon {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
   &--add {
     background: rgb(59, 221, 221) url('~./assets/icons/addPerson.svg') no-repeat center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
   &--view {
-    background: #315ca0 url('~./assets/icons/details.svg') no-repeat center;
+    position: relative;
+    &:after {
+      background: #315ca0 url('~./assets/icons/details.svg') no-repeat center;
+      border-radius: 7px;
+      position: absolute;
+      content: "";
+      top: 7px;
+      left: 10px;
+      height: 30px;
+      width: 30px;
+    }
   }
   &--edit {
     background: rgb(230, 158, 50) url('~./assets/icons/edit.svg') no-repeat center;
