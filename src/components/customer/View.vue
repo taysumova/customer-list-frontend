@@ -1,6 +1,6 @@
 <template>
   <div class="customer-info">
-    <h2 class="customer-info__title">Информация о клиенте</h2>
+    <h2 class="customer-info__title">Информация о&nbsp;клиенте</h2>
     <router-link
         :to="{
         name: 'Edit',
@@ -73,22 +73,25 @@ export default {
 
 <style lang="scss">
   .customer-info {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+    background: white;
+    padding: 10px;
     position: relative;
     margin: 0 auto;
     max-width: 700px;
     &__title {
-      font-size: 1.2rem;
-      padding-right: 50px;
+      font-size: 1.4rem;
+      padding-right: 80px;
     }
     .btn--edit {
       position: absolute;
-      top: 0;
-      right: 33px;
+      top: 20px;
+      right: 53px;
     }
     .btn--delete {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 20px;
+      right: 10px;
     }
     .middle-block {
       display: flex;
@@ -97,15 +100,10 @@ export default {
     &__full-name {
       text-transform: capitalize;
       font-size: 1.8rem;
+      text-shadow: 1px 1px 10px #000000;
     }
     &__contacts {
       margin-right: 40px;
-      min-width: 300px;
-      width: 40%;
-    }
-    &__additional {
-      min-width: 300px;
-      width: 40%;
     }
     .contacts {
       &__data {
@@ -114,9 +112,11 @@ export default {
     }
     &__status {
       margin: 20px 0;
+      color: #000;
     }
     h3 {
       border-bottom: 2px solid gray;
+      color: #000;
     }
   }
 </style>
