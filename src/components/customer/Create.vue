@@ -1,29 +1,29 @@
 <template>
-  <div class="customer-form">
+  <form class="customer-form" @submit.prevent="createCustomer()">
     <h2 class="customer-form__title">Добавить клиента</h2>
     <div class="customer-form__input input">
-      <label class="input__label">Фамилия</label>
-      <input type="text" class="input__field" v-model="last_name">
+      <label class="input__label">Фамилия*</label>
+      <input type="text" class="input__field" v-model="last_name" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Имя</label>
-      <input type="text" class="input__field" v-model="first_name">
+      <label class="input__label">Имя*</label>
+      <input type="text" class="input__field" v-model="first_name" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Отчество</label>
       <input type="text" class="input__field" v-model="middle_name">
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Email</label>
-      <input type="text" class="input__field" v-model="email">
+      <label class="input__label">Email*</label>
+      <input type="email" class="input__field" v-model="email" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Номер телефона</label>
-      <input type="text" class="input__field" v-model="phone">
+      <label class="input__label">Номер телефона*</label>
+      <input type="text" class="input__field" v-model="phone" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Адрес</label>
-      <input type="text" class="input__field" v-model="address">
+      <label class="input__label">Адрес*</label>
+      <input type="text" class="input__field" v-model="address" required>
     </div>
     <div class="customer-form__textarea textarea">
       <label class="textarea__label">Дополнительная информация</label>
@@ -38,13 +38,13 @@
         <option class="select__option">Отмена</option>
       </select>
     </div>
-    <button class="btn btn--save" @click="createCustomer">Добавить</button>
+    <button class="btn btn--save">Добавить</button>
     <router-link
       to="/"
       class="btn--back">
       Вернуться без добавления &#8678;
     </router-link>
-  </div>
+  </form>
 </template>
 <script>
   import CustomerService from "@/services/CustomerService";

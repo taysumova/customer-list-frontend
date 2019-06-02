@@ -12,8 +12,23 @@
     </router-link>
     <button
         class="btn btn--icon btn--delete"
-        @click="deleteCustomer(id)">
+        @click="toggleDeleteModal">
     </button>
+    <div v-if="deleteMode" class="customer-info__confirm-delete">
+      <p>Вы уверены, что хотите удалить клиента?</p>
+      <div>
+        <button
+        class="btn btn--icon btn--yes"
+        @click="deleteCustomer(id)">
+        Да
+      </button>
+      <button
+        class="btn btn--icon btn--no"
+        @click="toggleDeleteModal">
+        Нет
+      </button>
+      </div>
+    </div>
     <div class="customer-info__status">
       Статус заявки: {{customer.status}}
     </div>
@@ -51,6 +66,7 @@ export default {
     data() {
         return {
             id: 0,
+            deleteMode: false,
             customer: {}
         }
     },
@@ -65,6 +81,9 @@ export default {
         },
         getBack() {
             router.push({ name: "CustomerList" });
+        },
+        toggleDeleteModal() {
+          this.deleteMode = !this.deleteMode;
         },
         deleteCustomer(id) {
             CustomerService.deleteCustomer(id)
@@ -148,6 +167,38 @@ export default {
     &__status {
       margin: 20px 0;
       color: #000;
+    }
+    &__confirm-delete {
+      background: rgba(43, 39, 39, 0.8);
+      position: absolute;
+      color: white;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      p {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      .btn {
+        &--icon {
+          width: 50px;
+          height: 50px;
+          margin: 10px;
+          display: inline-block;
+        }
+        &--yes {
+          background: red;
+        }
+      }
     }
     h3 {
       border-bottom: 2px solid gray;
