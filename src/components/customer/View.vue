@@ -23,9 +23,15 @@
     <div class="middle-block">
       <div class="customer-info__contacts contacts">
         <h3>Контактная информация: </h3>
-        <span class="contacts__data contacts__email"><b>Email: </b>{{customer.email}}</span>
-        <span class="contacts__data contacts__phone"><b>Номер: </b>{{customer.phone}}</span>
-        <span class="contacts__data contacts__address"><b>Адрес: </b>{{customer.address}}</span>
+        <span class="contacts__data contacts__email">{{customer.email}}</span>
+        <a
+          class="contacts__data contacts__phone"
+          :href="'tel:' + customer.phone">
+          {{customer.phone}}
+        </a>
+        <span class="contacts__data contacts__address">
+          {{customer.address}}
+        </span>
       </div>
       <div class="customer-info__additional">
         <h3>Дополнительная информация:</h3>
@@ -108,6 +114,35 @@ export default {
     .contacts {
       &__data {
         display: block;
+        position: relative;
+        padding: 10px 0 10px 35px;
+        &:before {
+          content: '';
+          position: absolute;
+          width: 26px;
+          height: 26px;
+          top: 5px;
+          left: 0
+        }
+      }
+      &__email {
+        &:before {
+          background: rgb(221, 132, 59) url('../../assets/icons/mail.svg') no-repeat center;
+          border-radius: 30%;
+        }
+      }
+      &__phone {
+        color: blue;
+        display: inline-block;
+        &:before {
+          border-radius: 50%;
+          background: rgb(59, 221, 221) url('../../assets/icons/phone.svg') no-repeat center;
+        }
+      }
+      &__address {
+        &:before {
+          background: url('../../assets/icons/address.svg') no-repeat center;
+        }
       }
     }
     &__status {
@@ -117,6 +152,9 @@ export default {
     h3 {
       border-bottom: 2px solid gray;
       color: #000;
+    }
+    &__additional p {
+      word-break: break-word;
     }
   }
 </style>
