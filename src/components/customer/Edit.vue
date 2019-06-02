@@ -2,27 +2,27 @@
   <form class="customer-form customer-form--edit" @submit.prevent="editCustomer()">
     <h2 class="customer-form__title">Отредактировать информацию</h2>
     <div class="customer-form__input input">
-      <label class="input__label">Фамилия</label>
+      <label class="input__label">Фамилия*</label>
       <input type="text" class="input__field" v-model="customer.last_name" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Имя</label>
+      <label class="input__label">Имя*</label>
       <input type="text" class="input__field" v-model="customer.first_name" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Отчество</label>
-      <input type="text" class="input__field" v-model="customer.middle_name" required>
+      <input type="text" class="input__field" v-model="customer.middle_name">
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Email</label>
+      <label class="input__label">Email*</label>
       <input type="email" class="input__field" v-model="customer.email" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Номер телефона</label>
+      <label class="input__label">Номер телефона*</label>
       <input type="text" class="input__field" v-model="customer.phone" required>
     </div>
     <div class="customer-form__input input">
-      <label class="input__label">Адрес</label>
+      <label class="input__label">Адрес*</label>
       <input type="text" class="input__field" v-model="customer.address" required>
     </div>
     <div class="customer-form__textarea textarea">
