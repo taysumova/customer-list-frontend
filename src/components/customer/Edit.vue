@@ -1,29 +1,29 @@
 <template>
-  <div class="customer-form customer-form--edit">
+  <form class="customer-form customer-form--edit" @submit.prevent="editCustomer()">
     <h2 class="customer-form__title">Отредактировать информацию</h2>
     <div class="customer-form__input input">
       <label class="input__label">Фамилия</label>
-      <input type="text" class="input__field" v-model="customer.last_name">
+      <input type="text" class="input__field" v-model="customer.last_name" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Имя</label>
-      <input type="text" class="input__field" v-model="customer.first_name">
+      <input type="text" class="input__field" v-model="customer.first_name" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Отчество</label>
-      <input type="text" class="input__field" v-model="customer.middle_name">
+      <input type="text" class="input__field" v-model="customer.middle_name" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Email</label>
-      <input type="text" class="input__field" v-model="customer.email">
+      <input type="email" class="input__field" v-model="customer.email" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Номер телефона</label>
-      <input type="text" class="input__field" v-model="customer.phone">
+      <input type="text" class="input__field" v-model="customer.phone" required>
     </div>
     <div class="customer-form__input input">
       <label class="input__label">Адрес</label>
-      <input type="text" class="input__field" v-model="customer.address">
+      <input type="text" class="input__field" v-model="customer.address" required>
     </div>
     <div class="customer-form__textarea textarea">
       <label class="textarea__label">Дополнительная информация</label>
@@ -38,7 +38,7 @@
         <option class="select__option">Отмена</option>
       </select>
     </div>
-    <button class="btn btn--save" @click="editCustomer">Сохранить</button>
+    <button class="btn btn--save">Сохранить</button>
     <router-link
       :to="{
           name: 'View',
@@ -49,7 +49,7 @@
       class="btn--back">
       Вернуться без сохранения &#8678;
     </router-link>
-  </div>
+  </form>
 </template>
 <script>
 import CustomerService from '@/services/CustomerService'
@@ -67,6 +67,8 @@ export default {
     },
     methods: {
         editCustomer() {
+          const isDataValid = true;
+          if (isDataValid) {
             let customerData = {
                 last_name: this.customer.last_name,
                 first_name: this.customer.first_name,
@@ -78,8 +80,7 @@ export default {
                 status: this.customer.status
             };
             CustomerService.editCustomer(this.id, customerData)
-                .then(data => {
-                    console.log(data);
+                .then(() => {
                     router.push({
                       name: 'View',
                       params: {
@@ -87,6 +88,7 @@ export default {
                         }
                     });
                 });
+          }
         },
         getCustomer() {
           CustomerService.showCustomer(this.id)
